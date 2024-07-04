@@ -6,27 +6,33 @@ import {
   TVariant,
 } from './product.interface';
 
-const variantSchema = new Schema<TVariant>({
-  type: {
-    type: String,
-    required: [true, 'Type is required.'],
+const variantSchema = new Schema<TVariant>(
+  {
+    type: {
+      type: String,
+      required: [true, 'Type is required.'],
+    },
+    value: {
+      type: String,
+      required: [true, 'Value is required.'],
+    },
   },
-  value: {
-    type: String,
-    required: [true, 'Value is required.'],
-  },
-});
+  { _id: false },
+);
 
-const inventorySchema = new Schema<TInventory>({
-  quantity: {
-    type: Number,
-    required: true,
+const inventorySchema = new Schema<TInventory>(
+  {
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    inStock: {
+      type: Boolean,
+      required: true,
+    },
   },
-  inStock: {
-    type: Boolean,
-    required: true,
-  },
-});
+  { _id: false },
+);
 
 export const productSchema = new Schema<TProduct>(
   {
