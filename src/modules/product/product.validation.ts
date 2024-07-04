@@ -22,6 +22,23 @@ const createProductValidationSchema = z.object({
   inventory: inventoryValidationSchema,
 });
 
+const updateProductValidationSchema = z.object({
+  name: z.string().min(1, 'Product name is required.').optional(),
+  description: z.string().min(1, 'Product description is required.').optional(),
+  price: z.number().min(0, 'Price must be a positive number.').optional(),
+  category: z.string().min(1, 'Category is required.').optional(),
+  tags: z
+    .array(z.string().min(1, 'Each tag must be a non-empty string.'))
+    .min(1, 'At least one tag is required.')
+    .optional(),
+  variants: z
+    .array(variantValidationSchema)
+    .min(1, 'Variants are required.')
+    .optional(),
+  inventory: inventoryValidationSchema.optional(),
+});
+
 export const ProductZodValidation = {
   createProductValidationSchema,
+  updateProductValidationSchema,
 };

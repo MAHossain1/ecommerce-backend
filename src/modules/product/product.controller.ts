@@ -88,7 +88,14 @@ const updateProduct = async (req: Request, res: Response) => {
   try {
     const productId = req.params.productId;
     const productData = req.body.product;
-    const result = await ProductService.updateProduct(productId, productData);
+
+    const updateZodValidateData =
+      ProductZodValidation.updateProductValidationSchema.parse(productData);
+
+    const result = await ProductService.updateProduct(
+      productId,
+      updateZodValidateData,
+    );
 
     res.status(200).json({
       success: true,
