@@ -6,6 +6,12 @@ const createOrderIntoDB = async (payload: TOrder): Promise<TOrder | null> => {
   return result;
 };
 
+const getOrdersFromDB = async (): Promise<TOrder[] | null> => {
+  const result = await Order.find();
+  return result;
+};
+
 export const OrderService = {
   createOrderIntoDB,
+  getOrdersFromDB,
 };

@@ -25,6 +25,25 @@ const createOrderIntoDB = async (req: Request, res: Response) => {
   }
 };
 
+const getOrdersFromDB = async (req: Request, res: Response) => {
+  try {
+    const result = await OrderService.getOrdersFromDB();
+
+    res.status(200).json({
+      success: true,
+      message: 'Orders retrieved successfully.',
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve orders.',
+      error,
+    });
+  }
+};
+
 export const OrderController = {
   createOrderIntoDB,
+  getOrdersFromDB,
 };
