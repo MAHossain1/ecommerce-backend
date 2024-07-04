@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
-const config_1 = __importDefault(require("./config"));
+const config_1 = __importDefault(require("./app/config"));
 let server;
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -30,7 +30,7 @@ function main() {
     });
 }
 main();
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
     console.log('Unhandled Rejection is detected, shutting down ...', err);
     if (server) {
         server.close(() => {

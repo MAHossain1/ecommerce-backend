@@ -19,6 +19,7 @@ async function main() {
 
 main();
 
+// gracefully maintain the server
 process.on('unhandledRejection', (err) => {
   console.log('Unhandled Rejection is detected, shutting down ...', err);
 

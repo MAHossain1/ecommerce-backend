@@ -22,7 +22,9 @@ app.use((req: Request, res: Response) => {
 
 // test
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+  res
+    .status(200)
+    .json('Welcome to the assignment (ecommerce-backend) project!!');
 });
 
 export default app;
