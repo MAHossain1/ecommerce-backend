@@ -28,7 +28,28 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getProductsFromDB = async (req: Request, res: Response) => {
   try {
-    const result = await ProductService.getProductsFromDB();
+    const searchTerm = req.query.searchTerm as string;
+
+    const result = await ProductService.getProductsFromDB(searchTerm);
+
+    res.status(200).json({
+      success: true,
+      message: 'Products retrieved successfully.',
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve products.',
+      error,
+    });
+  }
+};
+const getProductsBySearchTerm = async (req: Request, res: Response) => {
+  try {
+    const searchTerm = req.query.searchTerm as string;
+
+    const result = await ProductService.getProductsBySearchTerm(searchTerm);
 
     res.status(200).json({
       success: true,
@@ -113,6 +134,7 @@ const deleteProductFromDB = async (req: Request, res: Response) => {
 export const ProductController = {
   createProduct,
   getProductsFromDB,
+  getProductsBySearchTerm,
   getProductById,
   updateProduct,
   deleteProductFromDB,
