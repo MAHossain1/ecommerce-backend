@@ -62,4 +62,11 @@ export const productSchema = new Schema<TProduct>(
   },
 );
 
+productSchema.post('findOneAndDelete', async function (doc) {
+  if (!doc) {
+    return null;
+  }
+  return null;
+});
+
 export const Product = model<TProduct, ProductModel>('Product', productSchema);
