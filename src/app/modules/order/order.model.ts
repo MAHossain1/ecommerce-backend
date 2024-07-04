@@ -42,7 +42,10 @@ orderSchema.pre('save', async function (next) {
     throw new Error('Insufficient quantity available in inventory');
   }
 
+  // reduce the ordered quantity from the products inventory.
   product.inventory.quantity = product.inventory.quantity - order.quantity;
+
+  // update the instock status based on the remaining inventory quantity.
   product.inventory.inStock = product.inventory.quantity > 0;
 
   await product.save();

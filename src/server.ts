@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import app from './app';
-import config from './config';
+import config from './app/config';
 import { Server } from 'http';
 
 let server: Server;
@@ -19,7 +19,7 @@ async function main() {
 
 main();
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.log('Unhandled Rejection is detected, shutting down ...', err);
 
   if (server) {

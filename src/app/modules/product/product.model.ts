@@ -33,6 +33,7 @@ export const productSchema = new Schema<TProduct>(
     name: {
       type: String,
       required: [true, 'Product name is required.'],
+      unique: true,
     },
     description: {
       type: String,

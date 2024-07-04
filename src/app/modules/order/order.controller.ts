@@ -22,10 +22,11 @@ const createOrderIntoDB = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
+    const err = error as Error;
     res.status(500).json({
       success: false,
       message: 'Failed to create order.',
-      error: error.message,
+      error: err.message,
     });
   }
 };
