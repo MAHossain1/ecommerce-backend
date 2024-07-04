@@ -2,6 +2,8 @@ import { TOrder } from './order.interface';
 import { Order } from './order.model';
 
 const createOrderIntoDB = async (payload: TOrder): Promise<TOrder | null> => {
+  //   console.log(payload);
+
   const result = await Order.create(payload);
   return result;
 };

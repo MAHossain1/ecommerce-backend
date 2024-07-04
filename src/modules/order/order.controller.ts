@@ -1,15 +1,20 @@
 import { Request, Response } from 'express';
 import { OrderService } from './order.service';
 import { orderZodValidation } from './order.validation';
+import { TOrder } from './order.interface';
 
 const createOrderIntoDB = async (req: Request, res: Response) => {
   try {
     const orderData = req.body.order;
+    // console.log(orderData);
 
     const parsedOrderData =
       orderZodValidation.createOrderValidationSchema.parse(orderData);
+    // console.log(parsedOrderData);
 
-    const result = await OrderService.createOrderIntoDB(parsedOrderData);
+    const result = await OrderService.createOrderIntoDB(
+      parsedOrderData as unknown as TOrder,
+    );
 
     res.status(200).json({
       success: true,
@@ -20,7 +25,7 @@ const createOrderIntoDB = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: 'Failed to create order.',
-      error,
+      error: error.message,
     });
   }
 };
@@ -46,13 +51,6 @@ const getOrdersFromDB = async (req: Request, res: Response) => {
 const getOrdersByEmail = async (req: Request, res: Response) => {
   try {
     const email = req.query.email as string;
-
-    // if (!email) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: 'Email is required to fetch orders.',
-    //   });
-    // }
 
     const result = await OrderService.getOrdersByEmail(email);
 
