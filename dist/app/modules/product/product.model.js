@@ -20,7 +20,7 @@ const variantSchema = new mongoose_1.Schema({
         type: String,
         required: [true, 'Value is required.'],
     },
-});
+}, { _id: false });
 const inventorySchema = new mongoose_1.Schema({
     quantity: {
         type: Number,
@@ -30,7 +30,7 @@ const inventorySchema = new mongoose_1.Schema({
         type: Boolean,
         required: true,
     },
-});
+}, { _id: false });
 exports.productSchema = new mongoose_1.Schema({
     name: {
         type: String,

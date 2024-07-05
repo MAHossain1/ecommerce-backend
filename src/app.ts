@@ -12,19 +12,17 @@ app.use(cors());
 app.use('/api/products', ProductRoutes);
 app.use('/api/orders', OrderRoutes);
 
+// test
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello world!!');
+});
+
 // handle not found routes
 app.use((req: Request, res: Response) => {
   res.status(404).json({
     success: false,
     message: 'Route not found',
   });
-});
-
-// test
-app.get('/', (req: Request, res: Response) => {
-  res
-    .status(200)
-    .json('Welcome to the assignment (ecommerce-backend) project!!');
 });
 
 export default app;

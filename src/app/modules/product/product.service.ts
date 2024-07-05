@@ -1,12 +1,16 @@
 import { TProduct } from './product.interface';
 import { Product } from './product.model';
 
-const createProductIntoDB = async (payload: TProduct) => {
+const createProductIntoDB = async (
+  payload: TProduct,
+): Promise<TProduct | null> => {
   const result = await Product.create(payload);
   return result;
 };
 
-const getProductsFromDB = async (searchTerm: string) => {
+const getProductsFromDB = async (
+  searchTerm: string,
+): Promise<TProduct[] | null> => {
   //   console.log(searchTerm);
 
   let result: TProduct[];
@@ -25,7 +29,9 @@ const getProductsFromDB = async (searchTerm: string) => {
   return result;
 };
 
-const getProductsBySearchTerm = async (searchTerm: string) => {
+const getProductsBySearchTerm = async (
+  searchTerm: string,
+): Promise<TProduct[] | null> => {
   const result = await Product.find({
     $or: [
       { name: { $regex: new RegExp(searchTerm, 'i') } },
@@ -35,12 +41,15 @@ const getProductsBySearchTerm = async (searchTerm: string) => {
   return result;
 };
 
-const getProductById = async (id: string) => {
+const getProductById = async (id: string): Promise<TProduct | null> => {
   const result = await Product.findOne({ _id: id });
   return result;
 };
 
-const updateProduct = async (id: string, payload: Partial<TProduct>) => {
+const updateProduct = async (
+  id: string,
+  payload: Partial<TProduct>,
+): Promise<TProduct | null> => {
   const result = await Product.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   });

@@ -23,6 +23,6 @@ app.use((req, res) => {
 });
 // test
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello world!!');
 });
 exports.default = app;
